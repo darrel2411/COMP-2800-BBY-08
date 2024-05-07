@@ -1,6 +1,7 @@
-# COMP-2800-BBY-08
+# BINARY
+## COMP-2800-BBY-08
 
-## Team Description:
+### Team Description:
 
 | Name | Details |
 |-----:|---------|
