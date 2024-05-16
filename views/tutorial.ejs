@@ -9,10 +9,10 @@
 </head>
 <body>
     <% for(let i = 0; i<tutorialArray.length; i++) { %>
-        <div class="card text-center text-white bg-success mb-3" style="max-width: 18rem;">
+        <div class="card text-center text-white bg-success mb-3 mx-auto" style="max-width: 18rem;">
             <div class="card-header"><%= tutorialArray[i].title %></div>
             <form action="/articles/<%= i %>" method="post">
-                <button type="submit">Details</button>
+                <button type="submit" class="btn btn-primary">Details</button>
             </form>        
         </div>
     <% } %>
