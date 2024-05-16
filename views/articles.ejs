@@ -1,0 +1,11 @@
+<div>
+    <p><%= tutorialArray[articleId].content %></p>
+    <p></p>
+    <% for (let j = 0; j < tutorialArray[articleId].sections.length; j++) { %>
+    <h4><%= tutorialArray[articleId].sections[j].title %></h4>
+    <ul>
+        <li><%= tutorialArray[articleId].sections[j].content %></li>
+    </ul>
+    <p></p>
+    <% } %>
+</div>

@@ -51,7 +51,7 @@
     },
     {
         "title": "Cans: Sorting Aluminum and Steel for Recycling",
-        "content": "Aluminum and steel cans are common recyclable materials found in household waste. Properly sorting aluminum and steel cans for recycling helps conserve resources and reduce waste sent to landfills.",
+        "content": "Aluminum and steel cans are common recyclable materials found in household waste. Properly sorting aluminum and steel cans for recycling helps conserve resources and reduce waste sent to landfills. By sorting aluminum and steel cans for recycling, you can contribute to a more sustainable waste management system and protect the environment for future generations.",
         "sections": [
             {
                 "title": "Aluminum Cans",
@@ -69,7 +69,7 @@
     },
     {
         "title": "Glass Recycling: Identifying and Sorting Glass Waste",
-        "content": "Glass is a widely used material for packaging beverages, food, and other consumer products. Properly sorting glass waste for recycling is essential for conserving resources and reducing waste sent to landfills.",
+        "content": "Glass is a widely used material for packaging beverages, food, and other consumer products. Properly sorting glass waste for recycling is essential for conserving resources and reducing waste sent to landfills. By sorting glass waste for recycling, you can support a circular economy and promote sustainable waste management practices.",
         "sections": [
             {
                 "title": "Types of Glass",
@@ -86,20 +86,20 @@
         ]
     },
     {
-        "title": "Glass Recycling: Identifying and Sorting Glass Waste",
-        "content": "Glass is a widely used material for packaging beverages, food, and other consumer products. Properly sorting glass waste for recycling is essential for conserving resources and reducing waste sent to landfills.",
+        "title": "Bottles: Recognizing and Recycling Plastic and Glass Bottles",
+        "content": "Bottles are common household waste items used for packaging beverages, personal care products, and household cleaners. Properly sorting plastic and glass bottles for recycling helps conserve resources and reduce waste sent to landfills. By sorting plastic and glass bottles for recycling, you can contribute to a more sustainable waste management system and protect the environment for future generations.",
         "sections": [
             {
-                "title": "Types of Glass",
-                "content": "Glass containers come in various colors, including clear, green, and brown. Clear glass is commonly used for packaging products such as soda, juice, and wine. Green and brown glass are often used for packaging beer, liquor, and condiments. It's important to sort glass by color to maintain the quality of recycled glass materials."
+                "title": "Plastic Bottles",
+                "content": "Plastic bottles are lightweight containers made from various types of plastic, including PET and HDPE. They are commonly used for packaging water, soda, milk, juice, and cleaning products. Plastic bottles are highly recyclable and can be melted down and repurposed into new plastic products."
             },
             {
-                "title": "Examples of Glass Items",
-                "content": "Examples of glass items include bottles, jars, and containers used for beverages, sauces, and spices. Glass packaging is durable, inert, and 100% recyclable, making it an environmentally friendly choice for packaging materials."
+                "title": "Glass Bottles",
+                "content": "Glass bottles are rigid containers made from silica-based materials such as sand, soda ash, and limestone. They are commonly used for packaging beverages such as wine, beer, and spirits. Glass bottles are infinitely recyclable and can be melted down and transformed into new glass products with minimal loss of quality."
             },
             {
                 "title": "Recycling Process",
-                "content": "To recycle glass waste, it should be sorted by color and free of contaminants such as caps, lids, and food residue. Clean glass can be placed in the recycling bin or taken to a local recycling facility for processing. Recycling glass helps conserve natural resources, reduce energy consumption, and minimize waste disposal."
+                "content": "To recycle plastic and glass bottles, they should be rinsed and free of contaminants such as caps, lids, and labels. Clean bottles can be placed in the recycling bin or taken to a local recycling facility for processing. Recycling bottles helps conserve natural resources, reduce energy consumption, and minimize waste disposal."
             }
         ]
     },
@@ -122,26 +122,26 @@
         ]
     },
     {
-        "title": "Organic Waste Management: Sorting Food Scraps and Yard Waste",
-        "content": "Organic waste, including food scraps and yard waste, makes up a significant portion of household waste. Properly sorting organic waste for composting helps reduce greenhouse gas emissions and produce nutrient-rich soil amendments for gardening and agriculture.",
+        "title": "Trash Talk: Identifying Non-Recyclable Waste Items",
+        "content": "Non-recyclable waste items, also known as trash or garbage, are materials that cannot be repurposed, recycled, or composted. Properly identifying and disposing of non-recyclable waste items helps minimize waste sent to landfills and reduce environmental pollution. By properly identifying and disposing of non-recyclable waste items, you can minimize waste wrongly sent to recycle centres and promote responsible waste management practices.",
         "sections": [
             {
-                "title": "Food Scraps",
-                "content": "Food scraps are organic materials derived from fruits, vegetables, grains, and other food products. Common food scraps include fruit and vegetable peels, coffee grounds, eggshells, and leftover food. Food scraps are rich in nutrients and organic matter, making them ideal for composting."
+                "title": "Examples of Non-Recyclable Waste",
+                "content": "Examples of non-recyclable waste items include plastic bags, Styrofoam, disposable diapers, and sanitary products. These materials are typically made from non-biodegradable or difficult-to-recycle materials and cannot be processed into new products."
             },
             {
-                "title": "Yard Waste",
-                "content": "Yard waste consists of organic materials generated from landscaping and gardening activities. Examples of yard waste include grass clippings, leaves, branches, and plant trimmings. Yard waste can be composted along with food scraps to produce nutrient-rich compost for soil enrichment."
+                "title": "Disposal Methods",
+                "content": "Non-recyclable waste items should be disposed of in the garbage bin for municipal collection. It's important to follow local waste management guidelines and regulations when disposing of non-recyclable waste items to prevent environmental contamination and health hazards."
             },
             {
-                "title": "Composting Process",
-                "content": "To compost organic waste, it should be collected and placed in a compost bin or pile. Organic materials are then broken down by microorganisms through a process called decomposition. The resulting compost can be used to improve soil fertility, retain moisture, and suppress weeds in gardens and agricultural fields."
+                "title": "Environmental Impact",
+                "content": "Improper disposal of non-recyclable waste items can lead to pollution of air, water, and soil, harming ecosystems and human health. By properly disposing of non-recyclable waste items, you can minimize their environmental impact and contribute to a cleaner, healthier planet. "
             }
         ]
     },
     {
         "title": "E-Waste Management: Sorting and Recycling Electronic Devices",
-        "content": "Electronic waste (e-waste) refers to discarded electronic devices such as smartphones, laptops, tablets, and televisions. Properly sorting and recycling e-waste helps prevent environmental pollution and conserve valuable resources.",
+        "content": "Electronic waste (e-waste) refers to discarded electronic devices such as smartphones, laptops, tablets, and televisions. Properly sorting and recycling e-waste helps prevent environmental pollution and conserve valuable resources. By properly sorting and recycling e-waste, you can protect the environment, conserve resources, and promote a circular economy.",
         "sections": [
             {
                 "title": "Examples of E-Waste",
@@ -159,7 +159,7 @@
     },
     {
         "title": "Household Hazardous Waste: Sorting and Safely Disposing of Hazardous Materials",
-        "content": "Household hazardous waste includes products containing toxic, corrosive, flammable, or reactive materials that pose risks to human health and the environment if mishandled or improperly disposed of. Properly sorting and safely disposing of household hazardous waste helps prevent pollution and protect public health.",
+        "content": "Household hazardous waste includes products containing toxic, corrosive, flammable, or reactive materials that pose risks to human health and the environment if mishandled or improperly disposed of. Properly sorting and safely disposing of household hazardous waste helps prevent pollution and protect public health. By properly sorting and safely disposing of household hazardous waste, you can minimize environmental contamination and promote a healthier, cleaner environment.",
         "sections": [
             {
                 "title": "Examples of Hazardous Materials",
