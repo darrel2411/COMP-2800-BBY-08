@@ -4,6 +4,13 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const Joi = require('joi');
+const passport = require('passport');
+
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
+
+// require('./auth');
+app.use(express.json());
 
 // Login router
 const loginRouter = require('./routes/login.js');
@@ -46,6 +53,46 @@ app.use(session({
     saveUninitialized: false,
     resave: true
 }));
+
+passport.use(new GoogleStrategy({
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:3050/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    // User.findOrCreate({ googleId: profile.id }, function (err, user) {
+    //   return cb(err, user);
+    // });
+    done(null, profile);
+
+  }
+));
+
+passport.serializeUser((user, done)=>{
+    done(null, user);
+});
+
+passport.deserializeUser((user, done) =>{
+    done(null, user);
+});
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['email','profile'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', {
+     successRedirec: '/',
+     failureRedirect: '/login'
+ }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    req.session.authenticated = true;
+    req.session.username =  req.user.displayName;
+    res.redirect('/');
+  });
 
 // To do login
 app.use('/login', loginRouter);

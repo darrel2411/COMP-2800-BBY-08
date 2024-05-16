@@ -1,4 +1,4 @@
-<%- include('templates/header', {pageTitle: "Sign in" }) %>
+<%- include('templates/header') %>
 
 
     <div style="display: grid; place-items: center;">
@@ -20,6 +20,11 @@
         </form><br><br>
 
         <p style="text-align: center;">Don't have an account? <a href='/signup'>Create user</a></p>
+        <br>
+        
+        <form method="get" action="/auth/google">
+            <button type="submit" class="btn btn-info">Login with google</button>
+        </form>
     </div>
 
 
