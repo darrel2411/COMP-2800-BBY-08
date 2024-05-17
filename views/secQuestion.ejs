@@ -1,0 +1,21 @@
+<%- include('templates/header') %>
+
+<div style="display: grid; place-items: center;">
+    <h2 style="margin: 4vw;">Reset password</h2>
+    <form action='/resetPassword' method='post' style="width: auto;">
+        <div class="row mb-3" >
+            <label for="inputEmail3" class=" col-form-label"><%= user %></label>
+        </div>
+        <div class="row mb-3">
+            <label for="inputEmail3" class=" col-form-label" ><%= question %>?</label>
+            <input type="text" class="form-control" id="inputEmail3" name='secAnswer' required=true>
+        </div>
+        <div style="display: grid; place-items: center;">
+            <button type="submit" class="btn btn-primary">Confirm</button>
+        </div>
+    </form><br>
+
+    <p style="text-align: center;">Would you like to login instead? <a href='/login'>Login</a></p><br>
+</div>
+
+<%- include('templates/footer') %>
