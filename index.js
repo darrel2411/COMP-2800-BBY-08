@@ -3,19 +3,20 @@ require('./utils.js');
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const Joi = require('joi');
+
 const passport = require('passport');
 
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-
-
-// require('./auth');
-app.use(express.json());
+require('./routes/googleAuth.js');
 
 // Login router
 const loginRouter = require('./routes/login.js');
 // signup router
 const signUpRouter = require('./routes/signup.js');
+// Reset password route
+const confirmUser = require('./routes/reset_password/confirmUser.js');
+const confirmEmail = require('./routes/reset_password/confirmEmail.js');
+const resetPassword = require('./routes/reset_password/resetPassword.js');
+const changePassword = require('./routes/reset_password/changePassword.js');
 
 // to create a session 
 const session = require('express-session');
@@ -54,60 +55,34 @@ app.use(session({
     resave: true
 }));
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:3050/auth/google/callback"
-},
-    async function (accessToken, refreshToken, profile, done) {
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //   return cb(err, user);
-        // });
-        console.log(profile);
-        console.log("Email infomation is: " + profile.emails[0].value);
-        console.log("Username is: " + profile.name.givenName);
+const navLinks = [
+    {name: 'Home', link: '/'},
+    {name: 'Recycle Centers', link: '/'},
+    {name: 'Scan', link: '/'},
+    {name: 'Tutorial', link: '/'},
+    {name: 'Profile', link: '/'}
+];
 
-        const emailCheck = profile.emails[0].value;
-        const username = profile.name.givenName;
-        const existEmail = await userCollection.find({ email: emailCheck }).toArray();
-        console.log('existEmail values is: ' + existEmail);
+// Passport to use google authentication
+app.use(passport.initialize()); // initialize the passport
+app.use(passport.session());    // initialize the session
 
-        if (!(existEmail.length > 0)) {
-            await userCollection.insertOne({ username: username, email: emailCheck });
-            console.log("User inserted to database.")
-        }
-
-        done(null, profile);
-
-    }
-));
-
-passport.serializeUser((user, done) => {
-    done(null, user);
-});
-
-passport.deserializeUser((user, done) => {
-    done(null, user);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
-
+// Will do the login with google 
 app.get('/auth/google',
     passport.authenticate('google', { scope: ['email', 'profile'] }));
 
+// Callback than handles the response after sign in with google
 app.get('/auth/google/callback',
     passport.authenticate('google', {
-        successRedirec: '/',
-        failureRedirect: '/login'
+        successRedirec: '/', // If succesfully login it will
+        failureRedirect: '/login' // if something went wrong when login in with google
     }),
     function (req, res) {
-        // Successful authentication, redirect home.
-        const username = req.user.name.givenName;
-        req.session.authenticated = true;
-        req.session.username = username;
-        req.session.cookie.maxAge = expireTime;
-        res.redirect('/');
+        const username = req.user.name.givenName; // to get the name of the user from the google login
+        req.session.authenticated = true; // to verify it has a session and allowed to go to the pages where a user is required
+        req.session.username = username; // to set the username 
+        req.session.cookie.maxAge = expireTime; // to set the expire time of the session which is one hour for the moment
+        res.redirect('/'); // Successful authentication, redirect home.
     });
 
 // To do login
@@ -115,10 +90,18 @@ app.use('/login', loginRouter);
 // verifies the if the user exists
 app.use('/verifyUser', loginRouter);
 
+//to do reset password
+// app.use('/confirmUser', resetPassword);
+
 // Link to the route sign up
 app.use('/signup', signUpRouter);
 app.use('/createUser', signUpRouter);
 
+// Link to reset the password and enter the email to identify which account
+app.use('/confirmUser', confirmUser); // send a form a where the user will enter his email
+app.use('/confirmEmail', confirmEmail); // gets the email to check if it exist in the database and send back the security question
+app.use('/resetPassword', resetPassword); // gets the answer and verify if it matches with the one in the database redirect to a form where the user enter the new password
+app.use('/changePassword', changePassword); // gets the new password and verify it with joi and resets the new one in the database
 
 // Links to the main page
 app.get('/', (req, res) => {
@@ -126,13 +109,18 @@ app.get('/', (req, res) => {
         res.redirect('/login');
         return;
     }
-    let form = "<form method='post' action='/logout'>"
-        + "<button>Logout</button>"
-        + "</form>";
-    res.send('Hello ' + req.session.username + '!' + form);
+   
+    res.render('home', {navLinks: navLinks, username:req.session.username});
 });
 
-
+app.get('/home', (req, res) => {
+    if (!req.session.authenticated) {
+        res.redirect('/login');
+        return;
+    }
+   
+    res.render('home', {navLinks: navLinks, username:req.session.username});
+});
 
 // Logout 
 app.post('/logout', (req, res) => {

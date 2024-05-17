@@ -30,7 +30,7 @@ router.post('/', async(req, res) => {
     const validationResult = schema.validate(email);
     if (validationResult.error != null) {
         console.log(validationResult.error);
-        res.redirect('/login/1');
+        res.redirect('/login');
         return;
     }
 
@@ -42,7 +42,7 @@ router.post('/', async(req, res) => {
     // result is an array, if it is empty then user was not found
     if(result.length != 1) {
         console.log('User not found');
-        res.redirect('/login/2');
+        res.redirect('/login');
         return;
     }
 
@@ -58,7 +58,7 @@ router.post('/', async(req, res) => {
         return;
     } else {
         console.log('Incorrect password');
-        res.redirect('/login/3');
+        res.redirect('/login');
         return;
     }
 
