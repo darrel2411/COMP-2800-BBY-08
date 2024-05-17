@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 /node_modules
 package-lock.json
 .env
+=======
+.env
+package-lock.json
+node_modules
+>>>>>>> e9f37bc (gitignore updated)
