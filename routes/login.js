@@ -21,6 +21,15 @@ router.get('/', (req, res) => {
     res.render("login");
 });
 
+router.get('/:id', (req, res) => {
+    if(req.session.authenticated){
+        res.redirect('/');
+        return;
+    }
+    const problem = req.params.id;
+    res.render("login2", {problem: problem});
+});
+
 router.post('/', async(req, res) => {
     let email = req.body.email;
     let password = req.body.password;
@@ -30,7 +39,7 @@ router.post('/', async(req, res) => {
     const validationResult = schema.validate(email);
     if (validationResult.error != null) {
         console.log(validationResult.error);
-        res.redirect('/login');
+        res.redirect('/login/1');
         return;
     }
 
@@ -42,7 +51,7 @@ router.post('/', async(req, res) => {
     // result is an array, if it is empty then user was not found
     if(result.length != 1) {
         console.log('User not found');
-        res.redirect('/login');
+        res.redirect('/login/2');
         return;
     }
 
@@ -59,7 +68,7 @@ router.post('/', async(req, res) => {
         return;
     } else {
         console.log('Incorrect password');
-        res.redirect('/login');
+        res.redirect('/login/3');
         return;
     }
 

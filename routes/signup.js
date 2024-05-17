@@ -24,6 +24,16 @@ router.get('/', (req, res) => {
     res.render('signup');
 });
 
+// links to sign in page
+router.get('/:id', (req, res) => {
+    if(req.session.authenticated){
+        res.redirect('/');
+        return;
+    }
+    const problem = req.params.id;
+    res.render('signup2', {problem: problem});
+});
+
 // Creates a user and stores them in the database
 router.post('/', async (req, res) => {
     let username = req.body.username;
@@ -39,7 +49,7 @@ router.post('/', async (req, res) => {
     const existEmail = await userCollection.find({email: email}).toArray();
 
     if(existEmail.length > 0){
-        res.redirect('/signup'); //if it does then it will be redirected to sign up
+        res.redirect('/signup/1'); //if it does then it will be redirected to sign up
         return;
     }
 
@@ -54,7 +64,7 @@ router.post('/', async (req, res) => {
 
     if(validationResult.error != null){
         console.log(validationResult.error);
-        res.redirect('/signup');
+        res.redirect('/signup/2');
         return;
     }
 

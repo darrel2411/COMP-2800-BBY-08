@@ -1,0 +1,46 @@
+<%- include('templates/header') %>
+
+
+    <div style="display: grid; place-items: center;">
+        <h2 style="margin: 2vw;">Login</h2>
+        <% if(problem == 1){ %>
+            <h4 style="text-align: center;">Invalid email</h4>
+            <%} else if(problem == 2) {%>
+                <h4 style="text-align: center;">User not found</h4>
+                <% } else if(problem == 3) {%>
+                    <h4 style="text-align: center;">Incorrect password</h4>
+                    <% } %>
+        <form action='/verifyUser' method='post' style="width: auto;">
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label" >Email</label>
+                <input type="email" class="form-control" id="inputEmail3" name='email' required=true>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                <input type="password" class="form-control" id="inputPassword3" name='password' required="true">
+
+            </div>
+            <!-- Forgot password field -->
+            <div>
+                <p style="text-align: right;"><a href="/confirmUser">Forgot password?</a></p>
+            </div> <br>
+            <div style="display: grid; place-items: center;">
+                <button type="submit" class="btn btn-primary">Sign in</button>
+                
+            </div>
+        </form><br><br>
+       
+
+        <p style="text-align: center;">Don't have an account? <a href='/signup'>Create user</a></p><br>
+        <p style="text-align: center;"><b>or</b></p>
+        <br>
+        
+        <form method="get" action="/auth/google">
+            <button type="submit" class="btn btn-info">Login with google</button>
+        </form>
+    </div>
+
+
+
+
+    <%- include('templates/footer') %>
