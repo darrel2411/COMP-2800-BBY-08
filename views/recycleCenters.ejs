@@ -1,0 +1,50 @@
+<%- include('templates/header') %>
+    <%- include('templates/navbar', {navLinks: navLinks}) %>
+        <div class="pt-5">
+            <div id="map" class="container text-center"></div>
+            <div class="container text-center mt-3">
+                <select id="mySelection" class="form-select" aria-label="Default select example">
+                    <option>--Open this select menu--</option>
+                    <otion value="cardboard">Cardboard</option>
+                        <option value="glass">Glass</option>
+                        <option value="metal">Metal</option>
+                        <option value="plastic">Plastic</option>
+                        <option value="paper">Paper</option>
+                        <option value="trash">Trash</option>
+                </select>
+                <button type="button" onclick="getSelected()" class="btn btn-primary mt-2">Find location</button>
+            </div>
+
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiZGFycmVsZ2lvIiwiYSI6ImNsdzhoMDRibjJjc2EybnF6a2FhdWs2YTgifQ.11mCPzXcuXT20hmypmw50w';
+
+                const map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v12',
+                    center: [-123.06925252771276, 49.26264182277888,],
+                    zoom: 9.5
+                });
+            </script>
+            <style>
+                .marker {
+                    background-image: url('/images/location-pin.png');
+                    background-size: cover;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+            </style>
+        </div>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+
+            #map {
+                width: 80%;
+                height: 200px;
+            }
+        </style>
+        <%- include('templates/footer') %>
