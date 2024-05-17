@@ -21,10 +21,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "http://localhost:3050/auth/google/callback"
 },
     async function (accessToken, refreshToken, profile, done) {
-        // User.findOrCreate({ googleId: profile.id }, function (err, user) {
-        //   return cb(err, user);
-        // });
-        console.log(profile);
+       
         console.log("Email infomation is: " + profile.emails[0].value);
         console.log("Username is: " + profile.name.givenName);
 

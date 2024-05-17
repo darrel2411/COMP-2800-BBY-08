@@ -4,29 +4,14 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+// Authentication with google
 const passport = require('passport');
-
 require('./routes/googleAuth.js');
 
-// Login router
-const loginRouter = require('./routes/login.js');
-// signup router
-const signUpRouter = require('./routes/signup.js');
-// Reset password route
-const confirmUser = require('./routes/reset_password/confirmUser.js');
-const confirmEmail = require('./routes/reset_password/confirmEmail.js');
-const resetPassword = require('./routes/reset_password/resetPassword.js');
-const changePassword = require('./routes/reset_password/changePassword.js');
-
+// Mongo db information necessary
 // to create a session 
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
-
-const port = process.env.PORT || 3000;
-const expireTime = 60 * 60 * 1000;// Hour, minutes, seconds miliseconds
-
-app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: false })); //to parse the body
 
 // Mongo security information
 const mongodb_user = process.env.MONGODB_USER;
@@ -35,11 +20,6 @@ const mongodb_host = process.env.MONGODB_HOST;
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
-
-var { database } = include('databaseConnection');
-
-// connect the collection of users in the database
-const userCollection = database.db(mongodb_database).collection('users');
 
 var mongoStore = MongoStore.create({
     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/${mongodb_database}`,
@@ -55,12 +35,37 @@ app.use(session({
     resave: true
 }));
 
+// routes
+// Login router
+const loginRouter = require('./routes/login.js');
+// signup router
+const signUpRouter = require('./routes/signup.js');
+// profile router
+const profile = require('./routes/profile.js');
+// Reset password route
+const confirmUser = require('./routes/reset_password/confirmUser.js');
+const confirmEmail = require('./routes/reset_password/confirmEmail.js');
+const resetPassword = require('./routes/reset_password/resetPassword.js');
+const changePassword = require('./routes/reset_password/changePassword.js');
+
+const port = process.env.PORT || 3000;
+const expireTime = 60 * 60 * 1000;// Hour, minutes, seconds miliseconds
+
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: false })); //to parse the body
+
+var { database } = include('databaseConnection');
+
+// connect the collection of users in the database
+const userCollection = database.db(mongodb_database).collection('users');
+
+// navigation bar links
 const navLinks = [
     {name: 'Home', link: '/'},
     {name: 'Recycle Centers', link: '/'},
     {name: 'Scan', link: '/'},
     {name: 'Tutorial', link: '/'},
-    {name: 'Profile', link: '/'}
+    {name: 'Profile', link: '/profile'}
 ];
 
 // Passport to use google authentication
@@ -82,6 +87,7 @@ app.get('/auth/google/callback',
         req.session.authenticated = true; // to verify it has a session and allowed to go to the pages where a user is required
         req.session.username = username; // to set the username 
         req.session.cookie.maxAge = expireTime; // to set the expire time of the session which is one hour for the moment
+        req.session.email = req.user.emails[0].value; //to set the email
         res.redirect('/'); // Successful authentication, redirect home.
     });
 
@@ -90,12 +96,12 @@ app.use('/login', loginRouter);
 // verifies the if the user exists
 app.use('/verifyUser', loginRouter);
 
-//to do reset password
-// app.use('/confirmUser', resetPassword);
-
 // Link to the route sign up
 app.use('/signup', signUpRouter);
 app.use('/createUser', signUpRouter);
+
+// Link to the profile page
+app.use('/profile', profile);
 
 // Link to reset the password and enter the email to identify which account
 app.use('/confirmUser', confirmUser); // send a form a where the user will enter his email
@@ -128,6 +134,8 @@ app.post('/logout', (req, res) => {
 
     res.redirect('/login');
 });
+
+app.use(express.static(__dirname + "/public"));
 
 // Catches all 404
 app.get('*', (req, res) => {

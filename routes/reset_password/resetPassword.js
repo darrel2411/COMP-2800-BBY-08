@@ -21,7 +21,7 @@ router.post('/', async (req, res) =>{
     console.log(sameAnswer)
     const correctA = sameAnswer[0].security_answer;
     console.log(correctA);
-    if(correctA === answer){
+    if(correctA.toLowerCase() === answer.toLowerCase()){
         res.render('changePassword', {user: sameAnswer[0].email});
         return;
     }

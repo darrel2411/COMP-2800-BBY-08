@@ -53,6 +53,7 @@ router.post('/', async(req, res) => {
         console.log('Correct password');
         req.session.authenticated = true;
         req.session.username = username;
+        req.session.email = email;
         req.session.cookie.maxAge = expireTime;
         res.redirect('/');
         return;

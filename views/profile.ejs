@@ -1,0 +1,47 @@
+<%- include('templates/header') %>
+
+<%- include('templates/navbar', {navLinks: navLinks}) %>
+
+ <!-- Div wraps evreything and centers it -->
+ <div style="display: grid; place-items: center;">
+    <h2 style="margin: 4vw;">User Information</h2>
+    <form action='/createUser' method='post'>
+      <!-- Email div -->
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail31" name='email' value="<%= user[0].email %>" disabled>
+      </div>
+
+      <!-- Username div -->
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Username</label>
+        <input type="text" class="form-control" id="inputEmail3" name='username' value="<%= user[0].username %>" disabled>
+      </div>
+
+      <!-- Registration method -->
+      <div class="row mb-3">
+        <label for="inputEmail3" class=" col-form-label">Registration Method</label>
+        <input type="text" class="form-control" id="inputEmail3" name='username' value="<%= user[0].registrationMethod %>" disabled>
+      </div>
+
+      <!-- if the user sign up with the binary form then it will show the security question and answer -->
+      <% if(user[0].registrationMethod === 'Binary'){ %>
+      <!-- Security question -->
+      <div class="row mb-3">
+        <label for="inputEmail3" class=" col-form-label">Security Question</label>
+        <input type="text" class="form-control" id="inputEmail3" name='username' value="<%= user[0].security_question %>" disabled>
+      </div>
+      <!-- Answer -->
+      <div class="row mb-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Answer</label>
+        <input type="text" class="form-control" id="inputEmail35" name='sec_Answer' value="<%= user[0].security_answer %>" disabled>
+      </div>
+      <% } %>
+    </form>
+
+    
+  </div>
+
+
+
+<%- include('templates/footer') %>
