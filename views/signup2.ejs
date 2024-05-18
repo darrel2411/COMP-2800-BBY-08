@@ -7,7 +7,9 @@
         <h4 style="text-align: center;">Email is already link to an account</h4>
         <%} else if(problem == 2) {%>
             <h4 style="text-align: center;">Invalid username or password</h4>
-            <% } %>
+            <% } else if(problem == 3) { %>
+                <h4 style="text-align: center;">Username taken</h4>
+                <% } %>
     <form action='/createUser' method='post'>
       <!-- Email div -->
       <div class="row mb-3">

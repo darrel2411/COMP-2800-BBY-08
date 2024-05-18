@@ -8,8 +8,10 @@
             <%} else if(problem == 2) {%>
                 <h4 style="text-align: center;">User not found</h4>
                 <% } else if(problem == 3) {%>
-                    <h4 style="text-align: center;">Incorrect password</h4>
-                    <% } %>
+                    <h4 style="text-align: center;">Invalid password</h4>
+                    <% } else if(problem == 4) {%>
+                        <h4 style="text-align: center;">Pasword updated succesfully</h4>
+                        <% } %>
         <form action='/verifyUser' method='post' style="width: auto;">
             <div class="row mb-3">
                 <label for="inputEmail3" class="col-sm-2 col-form-label" >Email</label>

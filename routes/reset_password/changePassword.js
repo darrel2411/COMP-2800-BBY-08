@@ -26,7 +26,7 @@ router.post('/', async (req, res) =>{
     const validationResult = schema.validate({newPassword});
     if(validationResult.error != null){
         console.log("Validation error with joi: " + validationResult.error);
-        res.redirect('/login');
+        res.redirect('/login/2');
         return;
     }
 
@@ -35,7 +35,7 @@ router.post('/', async (req, res) =>{
     await userCollection.updateOne({ email }, { $set: { password: hashPassword } });
     console.log('Password updated succesfully');
 
-    res.render('login');
+    res.redirect('/login/4');
 });
 
 module.exports = router;
