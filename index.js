@@ -246,7 +246,7 @@ app.use('/changePassword', changePassword); // gets the new password and verify 
 /** Arrays of tutorial articles to be parsed from tutorial.json */
 let tutorialArray;
 
-fs.readFile('tutorial.json', 'utf-8', (err, data) => {
+fs.readFile('tutorial.JSON', 'utf-8', (err, data) => {
     if (err) {
         console.error('Error reading file:', err);
         return;
