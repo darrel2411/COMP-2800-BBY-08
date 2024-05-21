@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
     console.log("Security question: "+ secQ);
     console.log("Security answer: " + secA);
 
-    //check is the email already has an account
+    //check if the email already has an account
     const existEmail = await userCollection.find({email: email}).toArray();
 
     if(existEmail.length > 0){
@@ -54,7 +54,7 @@ router.post('/', async (req, res) => {
     }
 
     const schema = Joi.object({
-        username: Joi.string().alphanum().max(20).required(),
+        username: Joi.string().max(20).required(),//can be used as a login id
         password: Joi.string().max(20).required()
     });
     
