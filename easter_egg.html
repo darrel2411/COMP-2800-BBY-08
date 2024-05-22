@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +14,7 @@
             height: 100vh;
             background-color: #f0f0f0;
             margin: 0;
+            overflow: scroll;
         }
 
         .game-container {
@@ -23,6 +25,7 @@
         }
 
         #score {
+            margin-top: 3vh;
             font-size: 24px;
             margin-bottom: 10px;
         }
@@ -48,17 +51,22 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
+            position: relative;
+
         }
 
         .item:active {
             transform: scale(1.1);
         }
 
+        /* change 4 */
         .bins {
             display: flex;
             justify-content: center;
             gap: 20px;
-            width: 100%;
+            height: auto;
+            width: 100vw;
+
         }
 
         .bin {
@@ -69,13 +77,18 @@
             width: 150px;
             text-align: center;
             border-radius: 8px;
+            border-top: 0px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: background-color 0.2s;
+            /* Change 2  */
+            position: relative;
+            z-index: 1;
         }
 
         .bin:hover {
             background-color: #f9f9f9;
         }
+
 
         #done-button {
             font-size: 18px;
@@ -92,23 +105,120 @@
         #done-button:hover {
             background-color: #45a049;
         }
+
+        #greenLid {
+            background-color: #45a049;
+            width: 18vw;
+            height: 3vh;
+            margin-left: .7vw;
+            color: #45a049;
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;            
+        }
+
+        #greenLidT {
+            background-color: #45a049;
+            width: 14vw;
+            height: 3vh;
+            margin-left: 2.7vw;
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+            color: #45a049;
+            
+        }
+
+        #handle {
+            background-color: black;
+            width: 5vw;
+            height: auto;
+            margin-left:7.1vw;
+            border-top-right-radius: 4px;
+            border-top-left-radius: 4px;
+            display: grid;
+            place-items: center;
+            
+        }
+
+        #inHandle {
+            background-color: white;
+            color: white;
+            width: 3vw;
+            height: 1vh;
+            font-size: 0px;
+            /* margin-left: 2vw;
+            margin-bottom: 10vh; */
+        }
+
+        .blueLid {
+            background-color: rgb(6, 60, 179);
+            color: rgb(6, 60, 179);
+        }
+
+        
     </style>
 </head>
+
 <body>
     <div class="game-container">
         <p id="score">Score: 0</p>
         <p id="timer">Time: 30</p>
+
         <div class="items">
             <div id="apple" class="item" draggable="true" data-original-position="0">🍎 Apple</div>
             <div id="glass-bottle" class="item" draggable="true" data-original-position="1">🍾 Glass Bottle</div>
             <div id="cardboard-box" class="item" draggable="true" data-original-position="2">📦 Cardboard Box</div>
         </div>
+
+
         <div class="bins">
-            <div id="compost-bin" class="bin">Compost</div>
-            <div id="recycle-bin" class="bin">Recycle</div>
-            <div id="mixed-paper-bin" class="bin">Mixed Paper</div>
-            <div id="trash-bin" class="bin">Trash</div>
+
+            <!-- Green bin -->
+            <div>
+                <div id="handle">Text
+                    <div id="inHandle">text</div>
+                </div>
+                <div id="greenLidT">text</div>
+                <div id="greenLid">text</div>
+                <div id="compost-bin" class="bin" style="height: 30vh; width: 15vw;">Compost
+                    <!-- <img src="./public/images/gargabeBinG.png" style="height: 30to; width: 15vw;" alt="Compost Bin"> -->
+                </div>
+            </div>
+
+            <!-- blue bin -->
+            <div>
+                <div id="handle">Text
+                    <div id="inHandle">text</div>
+                </div>
+                <div id="greenLidT" style="background-color: rgb(6, 60, 179); color: rgb(6, 60, 179);">text</div>
+                <div id="greenLid" style="background-color: rgb(6, 60, 179); color: rgb(6, 60, 179);">text</div>
+                <div id="recycle-bin" class="bin" style="height: 30vh; width: 15vw;">Recycle
+                    <!-- <img src="./public/images/gargabeBinBlue.png" style="height: 30to; width: 15vw;" alt="Recycle Bin"> -->
+                </div>
+            </div>
+
+            <!-- Mix paper bin -->
+            <div>
+                <div id="handle">Text
+                    <div id="inHandle">text</div>
+                </div>
+                <div id="greenLidT" style="background-color: yellow; color: yellow;">text</div>
+                <div id="greenLid" style="background-color: yellow; color: yellow;">text</div>
+                <div id="mixed-paper-bin" class="bin" style="height: 30vh; width: 15vw;">Mixed Paper</div>
+            </div>
+
+            <!-- black bin -->
+            <div>
+                <div id="handle">Text
+                    <div id="inHandle">text</div>
+                </div>
+                <div id="greenLidT" style="background-color: black; color: black;">text</div>
+                <div id="greenLid" style="background-color: black; color: black;">text</div>
+                <div id="trash-bin" class="bin" style="height: 30vh; width: 15vw;">Trash
+                    <!-- <img src="./public/images/gargabeBinBlack.png" style="height: auto; width: 20vw;" alt="Trash Bin"> -->
+                </div>
+            </div>
         </div>
+
         <button id="done-button">Done</button>
     </div>
     <script>
@@ -213,7 +323,5 @@
         });
     </script>
 </body>
+
 </html>
-
-
-
