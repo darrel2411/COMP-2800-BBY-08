@@ -113,7 +113,7 @@
             margin-left: .7vw;
             color: #45a049;
             border-top-right-radius: 4px;
-            border-top-left-radius: 4px;            
+            border-top-left-radius: 4px;
         }
 
         #greenLidT {
@@ -124,19 +124,19 @@
             border-top-right-radius: 4px;
             border-top-left-radius: 4px;
             color: #45a049;
-            
+
         }
 
         #handle {
             background-color: black;
             width: 5vw;
             height: auto;
-            margin-left:7.1vw;
+            margin-left: 7.1vw;
             border-top-right-radius: 4px;
             border-top-left-radius: 4px;
             display: grid;
             place-items: center;
-            
+
         }
 
         #inHandle {
@@ -153,8 +153,6 @@
             background-color: rgb(6, 60, 179);
             color: rgb(6, 60, 179);
         }
-
-        
     </style>
 </head>
 
@@ -167,6 +165,9 @@
             <div id="apple" class="item" draggable="true" data-original-position="0">🍎 Apple</div>
             <div id="glass-bottle" class="item" draggable="true" data-original-position="1">🍾 Glass Bottle</div>
             <div id="cardboard-box" class="item" draggable="true" data-original-position="2">📦 Cardboard Box</div>
+            <div id="grapes" class="item" draggable="true" data-original-position="3">🍇 Grapes</div>
+            <div id="newspaper" class="item" draggable="true" data-original-position="4">📰 Newspaper</div>
+            <div id="razor" class="item" draggable="true" data-original-position="5">🪒 Razor</div>
         </div>
 
 
@@ -220,19 +221,22 @@
         </div>
 
         <button id="done-button">Done</button>
+        <button id="tryAgain" onclick="insertItems()">Try again</button>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', sortingGame);
+
+        function sortingGame() {
             const items = document.querySelectorAll('.item');
             const bins = document.querySelectorAll('.bin');
             const doneButton = document.getElementById('done-button');
-            let score = 0;
+            let score = 0; // score is initialize
             let timeLeft = 30; // 30 seconds timer
 
             const timerElement = document.getElementById('timer');
 
-            const correctSound = new Audio('correct.mp3'); // Add your correct sound file here
-            const incorrectSound = new Audio('incorrect.mp3'); // Add your incorrect sound file here
+            const correctSound = new Audio('./public/audio/correct.mp3'); // Add your correct sound file here
+            const incorrectSound = new Audio('./public/audio/wrong.mp3'); // Add your incorrect sound file here
 
             const originalPositions = document.querySelector('.items');
 
@@ -276,7 +280,10 @@
                 const correctBins = {
                     'apple': 'compost-bin',
                     'glass-bottle': 'recycle-bin',
-                    'cardboard-box': 'mixed-paper-bin'
+                    'cardboard-box': 'mixed-paper-bin',
+                    'grapes': 'compost-bin',
+                    'newspaper': 'mixed-paper-bin',
+                    'razor': 'trash-bin'
                 };
                 return correctBins[itemId] === binId;
             }
@@ -300,7 +307,10 @@
                 const correctPlacements = {
                     'apple': 'compost-bin',
                     'glass-bottle': 'recycle-bin',
-                    'cardboard-box': 'mixed-paper-bin'
+                    'cardboard-box': 'mixed-paper-bin',
+                    'grapes': 'compost-bin',
+                    'newspaper': 'mixed-paper-bin',
+                    'razor': 'trash-bin'
                 };
                 let allCorrect = true;
 
@@ -313,14 +323,67 @@
                 });
 
                 if (allCorrect) {
-                    alert('Congratulations! You have successfully sorted all the items.');
+                    alert(`Congratulations! You have successfully sorted all the items in ${(30 - timeLeft)} seconds.`);
+                    clearInterval(timerInterval);
                 } else {
                     alert('Some items are not sorted correctly. Please try again.');
                 }
             }
 
             const timerInterval = setInterval(updateTimer, 1000); // Update timer every second
-        });
+        }
+
+        // function restart() {
+
+        // }
+
+        // function insertItems() {
+        //     const itemsFind = [
+        //         {
+        //             icon: '🍎',
+        //             name: 'Apple',
+        //             name2: ''
+        //         },
+        //         {
+        //             icon: '🍾',
+        //             name: 'Glass',
+        //             name2: 'Bottle'
+        //         },
+        //         {
+        //             icon: '📦',
+        //             name: 'Cardboard',
+        //             name2: 'Box'
+        //         },
+        //         {
+        //             icon: '🍇',
+        //             name: 'Grapes',
+        //             name2: ''
+        //         },
+        //         {
+        //             icon: '🪒',
+        //             name: 'Razor',
+        //             name2: ''
+        //         }
+        //     ];
+
+        //     let divItems = document.querySelector('#items');
+        //     divItems.innerHTML = ''; // Clear previous items
+
+        //     let recycleBin = document.getElementById('recycle-bin');
+        //     recycleBin.innerHTML = '';
+
+        //     for (let i = 0; i < itemsFind.length; i++) {
+        //         const div = document.createElement('div');
+        //         div.setAttribute('id', itemsFind[i].name.toLowerCase());
+        //         div.setAttribute('class', 'item');
+        //         div.setAttribute('draggable', 'true');
+        //         div.setAttribute('data-original-position', i);
+        //         div.innerHTML = itemsFind[i].icon + ' ' + itemsFind[i].name;
+
+        //         // divItems.appendChild(div);
+        //     }
+        // }
+
     </script>
 </body>
 

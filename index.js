@@ -1,4 +1,4 @@
-require('./utils.js');
+require('./public/js/utils.js');
 
 const fs = require(`fs`);
 require('dotenv').config();
