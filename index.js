@@ -5,6 +5,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 
+// use scanHistory.js to log user scan history
+const scanHistoryRouter = require('./scanHistory');
+
 // Authentication with google
 const passport = require('passport');
 require('./routes/googleAuth.js');
@@ -21,6 +24,7 @@ const mongodb_host = process.env.MONGODB_HOST;
 const mongodb_database = process.env.MONGODB_DATABASE;
 const mongodb_session_secret = process.env.MONGODB_SESSION_SECRET;
 const node_session_secret = process.env.NODE_SESSION_SECRET;
+
 
 var mongoStore = MongoStore.create({
     mongoUrl: `mongodb+srv://${mongodb_user}:${mongodb_password}@${mongodb_host}/${mongodb_database}`,
@@ -246,7 +250,7 @@ app.use('/changePassword', changePassword); // gets the new password and verify 
 /** Arrays of tutorial articles to be parsed from tutorial.json */
 let tutorialArray;
 
-fs.readFile('tutorial.json', 'utf-8', (err, data) => {
+fs.readFile('tutorial.JSON', 'utf-8', (err, data) => {
     if (err) {
         console.error('Error reading file:', err);
         return;
@@ -254,7 +258,7 @@ fs.readFile('tutorial.json', 'utf-8', (err, data) => {
 
     try {
         tutorialArray = JSON.parse(data);
-        console.log(tutorialArray[0]);
+        // console.log(tutorialArray[0]);
     } catch (error) {
         console.error('Error parsing JSON', error);
     }
@@ -270,6 +274,8 @@ app.post('/articles/:articleId', (req, res) => {
     res.render("articles", { tutorialArray: tutorialArray, articleId, navLinks: navLinks });
 });
 
+app.use('/', scanHistoryRouter);
+
 // Links to the main page
 app.get('/', (req, res) => {
     if (!req.session.authenticated) {
@@ -280,7 +286,6 @@ app.get('/', (req, res) => {
     res.render('home', { navLinks: navLinks, username: req.session.username });
 });
 
-
 app.get('/home', (req, res) => {
     if (!req.session.authenticated) {
         res.redirect('/login');
@@ -289,6 +294,7 @@ app.get('/home', (req, res) => {
 
     res.render('home', { navLinks: navLinks, username: req.session.username });
 });
+
 
 app.get('/recycleCenters', (req, res) => {
     if (!req.session.authenticated) {
